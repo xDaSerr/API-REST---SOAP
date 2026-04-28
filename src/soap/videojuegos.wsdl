@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+  name="VideojuegosService"
+  targetNamespace="http://example.com/videojuegos/wsdl"
+  xmlns:tns="http://example.com/videojuegos/wsdl"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+  <types>
+    <xsd:schema targetNamespace="http://example.com/videojuegos/wsdl">
+
+      <xsd:element name="GetVideojuegosRequest" type="xsd:anyType"/>
+
+      <xsd:element name="GetVideojuegosResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="videojuegos" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetVideojuegoByIdRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetVideojuegoByIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="videojuego" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="CreateVideojuegoRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="titulo" type="xsd:string"/>
+            <xsd:element name="genero" type="xsd:string"/>
+            <xsd:element name="plataforma" type="xsd:string"/>
+            <xsd:element name="precio" type="xsd:decimal"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="CreateVideojuegoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mensaje" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+    </xsd:schema>
+  </types>
+
+  <message name="GetVideojuegosInput">
+    <part name="parameters" element="tns:GetVideojuegosRequest"/>
+  </message>
+
+  <message name="GetVideojuegosOutput">
+    <part name="parameters" element="tns:GetVideojuegosResponse"/>
+  </message>
+
+  <message name="GetVideojuegoByIdInput">
+    <part name="parameters" element="tns:GetVideojuegoByIdRequest"/>
+  </message>
+
+  <message name="GetVideojuegoByIdOutput">
+    <part name="parameters" element="tns:GetVideojuegoByIdResponse"/>
+  </message>
+
+  <message name="CreateVideojuegoInput">
+    <part name="parameters" element="tns:CreateVideojuegoRequest"/>
+  </message>
+
+  <message name="CreateVideojuegoOutput">
+    <part name="parameters" element="tns:CreateVideojuegoResponse"/>
+  </message>
+
+  <portType name="VideojuegosPortType">
+    <operation name="GetVideojuegos">
+      <input message="tns:GetVideojuegosInput"/>
+      <output message="tns:GetVideojuegosOutput"/>
+    </operation>
+
+    <operation name="GetVideojuegoById">
+      <input message="tns:GetVideojuegoByIdInput"/>
+      <output message="tns:GetVideojuegoByIdOutput"/>
+    </operation>
+
+    <operation name="CreateVideojuego">
+      <input message="tns:CreateVideojuegoInput"/>
+      <output message="tns:CreateVideojuegoOutput"/>
+    </operation>
+  </portType>
+
+  <binding name="VideojuegosBinding" type="tns:VideojuegosPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <operation name="GetVideojuegos">
+      <soap:operation soapAction="GetVideojuegos"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+    <operation name="GetVideojuegoById">
+      <soap:operation soapAction="GetVideojuegoById"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+    <operation name="CreateVideojuego">
+      <soap:operation soapAction="CreateVideojuego"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <service name="VideojuegosService">
+    <port name="VideojuegosPort" binding="tns:VideojuegosBinding">
+      <soap:address location="http://localhost:3000/wsdl"/>
+    </port>
+  </service>
+</definitions>
