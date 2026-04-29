@@ -55,6 +55,42 @@
         </xsd:complexType>
       </xsd:element>
 
+      <xsd:element name="UpdateVideojuegoRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+            <xsd:element name="titulo" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="genero" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="plataforma" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="precio" type="xsd:decimal" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="UpdateVideojuegoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mensaje" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="DeleteVideojuegoRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="DeleteVideojuegoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mensaje" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
     </xsd:schema>
   </types>
 
@@ -82,6 +118,22 @@
     <part name="parameters" element="tns:CreateVideojuegoResponse"/>
   </message>
 
+  <message name="UpdateVideojuegoInput">
+    <part name="parameters" element="tns:UpdateVideojuegoRequest"/>
+  </message>
+
+  <message name="UpdateVideojuegoOutput">
+    <part name="parameters" element="tns:UpdateVideojuegoResponse"/>
+  </message>
+
+  <message name="DeleteVideojuegoInput">
+    <part name="parameters" element="tns:DeleteVideojuegoRequest"/>
+  </message>
+
+  <message name="DeleteVideojuegoOutput">
+    <part name="parameters" element="tns:DeleteVideojuegoResponse"/>
+  </message>
+
   <portType name="VideojuegosPortType">
     <operation name="GetVideojuegos">
       <input message="tns:GetVideojuegosInput"/>
@@ -96,6 +148,16 @@
     <operation name="CreateVideojuego">
       <input message="tns:CreateVideojuegoInput"/>
       <output message="tns:CreateVideojuegoOutput"/>
+    </operation>
+
+    <operation name="UpdateVideojuego">
+      <input message="tns:UpdateVideojuegoInput"/>
+      <output message="tns:UpdateVideojuegoOutput"/>
+    </operation>
+
+    <operation name="DeleteVideojuego">
+      <input message="tns:DeleteVideojuegoInput"/>
+      <output message="tns:DeleteVideojuegoOutput"/>
     </operation>
   </portType>
 
@@ -116,6 +178,18 @@
 
     <operation name="CreateVideojuego">
       <soap:operation soapAction="CreateVideojuego"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+    <operation name="UpdateVideojuego">
+      <soap:operation soapAction="UpdateVideojuego"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+    <operation name="DeleteVideojuego">
+      <soap:operation soapAction="DeleteVideojuego"/>
       <input><soap:body use="literal"/></input>
       <output><soap:body use="literal"/></output>
     </operation>

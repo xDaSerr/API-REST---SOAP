@@ -13,7 +13,6 @@ router.get("/videojuegos", getVideojuegos);
 router.get("/videojuegos/:id", getVideojuego);
 router.post("/videojuegos", postVideojuego);
 router.put("/videojuegos/:id", putVideojuego);
-router.patch("/videojuegos/:id", putVideojuego);
 router.delete("/videojuegos/:id", deleteVideojuego);
 
 export default router;

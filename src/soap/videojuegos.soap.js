@@ -3,6 +3,7 @@ import { conn } from "../../db.js";
 export const videojuegosService = {
   VideojuegosService: {
     VideojuegosPort: {
+
       async GetVideojuegos() {
         try {
           const [rows] = await conn.query("SELECT * FROM videojuego");
@@ -56,7 +57,33 @@ export const videojuegosService = {
             mensaje: `Error al crear videojuego: ${error.message}`
           };
         }
-      }
+      },
+
+      async UpdateVideojuego(args) {
+  const { id, titulo, genero, plataforma, precio } = args;
+
+  const [result] = await conn.query(
+    `UPDATE videojuego
+     SET titulo = IFNULL(?, titulo),
+         genero = IFNULL(?, genero),
+         plataforma = IFNULL(?, plataforma),
+         precio = IFNULL(?, precio)
+     WHERE id = ?`,
+    [titulo, genero, plataforma, precio, id]
+  );
+
+  return { mensaje: "Videojuego actualizado" };
+},
+
+async DeleteVideojuego(args) {
+  const [result] = await conn.query(
+    "DELETE FROM videojuego WHERE id = ?",
+    [args.id]
+  );
+
+  return { mensaje: "Videojuego eliminado" };
+}
+
     }
   }
 };
